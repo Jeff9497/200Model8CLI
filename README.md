@@ -19,8 +19,6 @@ A revolutionary command-line interface that's not just a tool - it's an **intell
 **I am the first CLI that understands itself!** In self-aware mode, I can:
 
 - 📊 **Analyze my own code**: "Analyze your code quality"
-- 🐛 **Check my own GitHub issues**: "Check your GitHub issues"
-- 🚀 **Push my own updates**: "Push your latest code changes"
 - 📝 **Manage my documentation**: "Update your README"
 - 🔄 **Create PRs for myself**: "Create a PR for your improvements"
 
