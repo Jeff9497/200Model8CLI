@@ -1,4 +1,4 @@
-# 🤖 200Model8CLI - The Self-Aware AI Development Assistant
+#  200Model8CLI - The Self-Aware AI Development Assistant
 
 A revolutionary command-line interface that's not just a tool - it's an **intelligent agent that understands and manages its own code**!
 
