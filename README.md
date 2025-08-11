@@ -104,7 +104,7 @@ A revolutionary command-line interface that's not just a tool - it's an **intell
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/200Model8CLI.git
+git clone https://github.com/Jeff9497/200Model8CLI.git
 cd 200Model8CLI
 
 # Install dependencies
@@ -113,21 +113,33 @@ pip install -r requirements.txt
 # Install the CLI tool
 pip install -e .
 
-# Set up your OpenRouter API key
+# Option 1: Set up OpenRouter API key (for cloud models)
 export OPENROUTER_API_KEY="your-api-key-here"
+200model8cli set-api-key your-openrouter-key
 
-# Initialize configuration
-200model8cli config init
+# Option 2: Use local Ollama models (no API key needed)
+# Install Ollama from https://ollama.ai
+ollama pull qwen3:0.6b  # Fast local model
+200model8cli ollama switch  # Switch to local model
+
+# Option 3: Set up Groq API key (for fast cloud models)
+200model8cli set-groq-key your-groq-key
 ```
 
 ### Basic Usage
 
 ```bash
-# Interactive mode with default model
-200model8cli
+# Quick Start Options:
 
-# Use specific model
-200model8cli --model claude-3-opus
+# 1. Start with local Ollama models (no API key needed)
+200model8cli ollama list          # See available local models
+200model8cli ollama switch        # Switch to a local model
+200model8cli                      # Start interactive mode
+
+# 2. Start with cloud models (requires API key)
+200model8cli switch               # Choose from 56+ free OpenRouter models
+200model8cli groq switch          # Choose from 17 fast Groq models
+200model8cli                      # Start interactive mode
 
 # File operations
 200model8cli edit ./src/main.py "Add error handling to the login function"
@@ -215,19 +227,6 @@ ui:
 
 ## Development
 
-### Project Structure
-```
-200Model8CLI/
-├── src/model8cli/
-│   ├── core/          # Core API and model management
-│   ├── tools/         # Tool implementations
-│   ├── ui/            # CLI interface and formatting
-│   └── utils/         # Utilities and helpers
-├── tests/             # Test suite
-├── docs/              # Documentation
-└── examples/          # Usage examples
-```
-
 ### Running Tests
 ```bash
 # Run all tests
@@ -254,5 +253,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## Support
 
 - 📖 [Documentation](docs/)
-- 🐛 [Issue Tracker](https://github.com/yourusername/200Model8CLI/issues)
-- 💬 [Discussions](https://github.com/yourusername/200Model8CLI/discussions)
+- 🐛 [Issue Tracker](https://github.com/Jeff9497/200Model8CLI/issues)
+- 💬 [Discussions](https://github.com/Jeff9497/200Model8CLI/discussions)
+- 🌟 [GitHub Repository](https://github.com/Jeff9497/200Model8CLI)
