@@ -11,7 +11,7 @@ A revolutionary command-line interface that's not just a tool - it's an **intell
 
 ## 🌟 Revolutionary Features
 
-### 🧠 **Self-Aware Agent Mode** - *The Game Changer*
+### 🧠 **Self-Aware Agent Mode** 
 ```bash
 200model8cli self-aware
 ```
