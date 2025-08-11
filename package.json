@@ -1,0 +1,41 @@
+{
+  "name": "200model8cli",
+  "version": "1.0.0",
+  "description": "Advanced AI CLI with browser automation and tool calling",
+  "main": "index.js",
+  "bin": {
+    "200model8cli": "./bin/200model8cli.js",
+    "m8cli": "./bin/200model8cli.js"
+  },
+  "scripts": {
+    "install": "node scripts/install-python-deps.js",
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "ai",
+    "cli",
+    "openrouter",
+    "browser-automation",
+    "coding-assistant",
+    "tool-calling"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "inquirer": "^8.2.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/200model8cli.git"
+  },
+  "homepage": "https://github.com/yourusername/200model8cli#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/200model8cli/issues"
+  }
+}
