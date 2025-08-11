@@ -227,18 +227,6 @@ ui:
 
 ## Development
 
-### Running Tests
-```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=ai_cli
-
-# Run specific test file
-pytest tests/test_api.py
-```
-
 ### Contributing
 1. Fork the repository
 2. Create a feature branch
