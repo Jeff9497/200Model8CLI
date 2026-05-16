@@ -221,17 +221,21 @@ class SelfAwareAgent:
         return "\n".join(parts)
 
     def _prepare_tools(self) -> List[Dict]:
-        return [
-            {
-                "type": "function",
-                "function": {
-                    "name": name,
-                    "description": tool.description,
-                    "parameters": tool.parameters
-                }
-            }
-            for name, tool in self.tool_registry.tools.items()
-        ]
+        tools = []
+        for name, tool in self.tool_registry.tools.items():
+            try:
+                defn = tool.get_tool_definition()
+                tools.append({
+                    "type": "function",
+                    "function": {
+                        "name": defn.name,
+                        "description": defn.description,
+                        "parameters": defn.parameters
+                    }
+                })
+            except Exception:
+                pass
+        return tools
 
     def display_status(self):
         skills = self.skill_engine.list_skills()
