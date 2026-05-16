@@ -360,6 +360,20 @@ def self_aware(ctx):
 
 
 @main.command()
+@click.pass_context
+def bot(ctx):
+    """Start the Telegram bot. Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in .env"""
+    config = ctx.obj['config']
+    try:
+        from .bot.telegram_bot import start_bot
+        start_bot(config)
+    except ImportError:
+        click.echo("Telegram bot requires: pip install python-telegram-bot")
+    except ValueError as e:
+        click.echo(str(e))
+
+
+@main.command()
 @click.argument('github_token', required=True)
 @click.option('--repo-name', default='200model8cli', help='Repository name')
 @click.option('--private', is_flag=True, help='Create private repository')

@@ -1,4 +1,6 @@
 # Core dependencies
+python-telegram-bot>=21.0.0
+apscheduler>=3.10.0
 click>=8.0.0
 httpx>=0.24.0
 rich>=13.0.0
