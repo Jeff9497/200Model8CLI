@@ -37,7 +37,7 @@ class AgentScheduler:
         """
         self.memory = memory
         self.notify = notify_callback
-        self.scheduler = AsyncIOScheduler()
+        self.scheduler = AsyncIOScheduler(timezone="UTC")
         self._setup_daily_summary()
 
     def start(self):
@@ -57,7 +57,7 @@ class AgentScheduler:
         """Send an end-of-day summary every day at 21:00 local time."""
         self.scheduler.add_job(
             self._send_daily_summary,
-            CronTrigger(hour=21, minute=0),
+            CronTrigger(hour=18, minute=0, timezone="UTC"),  # 18:00 UTC = 21:00 EAT
             id="daily_summary",
             replace_existing=True
         )
