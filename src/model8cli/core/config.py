@@ -156,8 +156,9 @@ class Config:
         self.config_path = config_path or self._get_default_config_path()
         self.config_dir = self.config_path.parent
         
-        # Load environment variables
+        # Load environment variables — check current dir and ~/.env
         load_dotenv()
+        load_dotenv(Path.home() / ".env", override=False)
         
         # Initialize configuration sections
         self.api = APIConfig(openrouter_key="", groq_key="")
