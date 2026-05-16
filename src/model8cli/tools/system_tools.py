@@ -266,25 +266,23 @@ class SystemInfoTool(BaseTool):
                 if not PSUTIL_AVAILABLE:
                     info["network"] = {"error": "psutil not available on this platform"}
                 else:
-                  try:
-                    network_info = {
-                        "interfaces": {},
-                        "connections": len(psutil.net_connections()),
-                    }
-                    
-                    for interface, addrs in psutil.net_if_addrs().items():
-                        network_info["interfaces"][interface] = [
-                            {
-                                "family": addr.family.name,
-                                "address": addr.address,
-                                "netmask": addr.netmask,
-                            }
-                            for addr in addrs
-                        ]
-                    
-                    info["network"] = network_info
-                except Exception:
-                    pass
+                    try:
+                        network_info = {
+                            "interfaces": {},
+                            "connections": len(psutil.net_connections()),
+                        }
+                        for interface, addrs in psutil.net_if_addrs().items():
+                            network_info["interfaces"][interface] = [
+                                {
+                                    "family": addr.family.name,
+                                    "address": addr.address,
+                                    "netmask": addr.netmask,
+                                }
+                                for addr in addrs
+                            ]
+                        info["network"] = network_info
+                    except Exception:
+                        pass
             
             return ToolResult(success=True, result=info)
             
