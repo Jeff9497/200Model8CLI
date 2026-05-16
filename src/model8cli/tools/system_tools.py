@@ -15,7 +15,12 @@ from typing import Dict, List, Optional, Any
 import json
 
 import structlog
-import psutil
+try:
+    import psutil
+    PSUTIL_AVAILABLE = True
+except ImportError:
+    psutil = None
+    PSUTIL_AVAILABLE = False
 
 from .base import BaseTool, ToolCategory, ToolParameter, ToolResult
 from ..core.config import Config
@@ -244,20 +249,24 @@ class SystemInfoTool(BaseTool):
             
             # Add process information if requested
             if include_processes:
-                processes = []
-                for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_percent']):
-                    try:
-                        processes.append(proc.info)
-                    except (psutil.NoSuchProcess, psutil.AccessDenied):
-                        pass
-                
-                # Sort by CPU usage and take top 10
-                processes.sort(key=lambda x: x.get('cpu_percent', 0), reverse=True)
-                info["top_processes"] = processes[:10]
-            
+                if PSUTIL_AVAILABLE:
+                    processes = []
+                    for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_percent']):
+                        try:
+                            processes.append(proc.info)
+                        except (psutil.NoSuchProcess, psutil.AccessDenied):
+                            pass
+                    processes.sort(key=lambda x: x.get('cpu_percent', 0), reverse=True)
+                    info["top_processes"] = processes[:10]
+                else:
+                    info["top_processes"] = []
+
             # Add network information if requested
             if include_network:
-                try:
+                if not PSUTIL_AVAILABLE:
+                    info["network"] = {"error": "psutil not available on this platform"}
+                else:
+                  try:
                     network_info = {
                         "interfaces": {},
                         "connections": len(psutil.net_connections()),
@@ -580,6 +589,9 @@ class ProcessManagerTool(BaseTool):
         limit: int = 20
     ) -> ToolResult:
         try:
+            if not PSUTIL_AVAILABLE:
+                return ToolResult(success=False, error="psutil not available on this platform (Android/Termux). Process management unavailable.")
+
             if action == "list":
                 processes = []
                 
